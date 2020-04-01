@@ -96,6 +96,8 @@ function receiveMessage(msg) {
     console.log("msg :");
     console.log(msg);
     let mUnpack = JSON.parse(msg.payloadString);
+  console.log("JSON.parse(msg.payloadString) ");
+  console.log(JSON.parse(msg.payloadString));
   console.log("mUnpack: ");
   console.log(mUnpack);
     let receivedMessage = mUnpack.content;

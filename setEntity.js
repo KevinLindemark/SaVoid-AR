@@ -1,11 +1,12 @@
 // standard latlong
 
-function setEntity(){
-    window.onload = () => {
+function setEntity(place){
+ 
         const scene = document.querySelector('a-scene');
                     // MQTT
-                    const latitude = place.crd.lat;
-                    const longitude = place.crd.lon;
+                    console.log('place is', place);  
+                    const latitude = place.lat;
+                    const longitude = place.lon;
                     
                     console.log("Places: latitude: ")
                     console.log(latitude);
@@ -33,13 +34,11 @@ function setEntity(){
                         color: 'pink',
                         align: 'center',
                         width: 4,
-                        value: `${place.name} m. ${distanceMsg}`,
+                        value: `person m. ${distanceMsg}`,
                     });
 
                     textEl.setAttribute('position', '0 -0.75 0');
                     
                     entity.appendChild(textEl);
                     scene.appendChild(entity);
-                }
-
                 }
