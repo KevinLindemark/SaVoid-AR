@@ -1,9 +1,7 @@
-
 // getting places from APIs
-/*
-async function loadPlaces(position) {
-    console.log("position loadPlaces: ")
-    console.log(position)
+ function loadPlaces(position) {
+    //console.log("position: ");
+    //console.log(position);
     const params = {
         radius: 300,    // search places not farther than this value (in meters)
         clientId: 'YXHLAEFCNT0YYPIWLOK51A52ADHWADMPFYY4XCKBAALJCRRK',
@@ -14,24 +12,30 @@ async function loadPlaces(position) {
     // CORS Proxy to avoid CORS problems
     const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
+
     // Foursquare API (limit param: number of maximum places to fetch)
     const endpoint = `${corsProxy}https://api.foursquare.com/v2/venues/search?intent=checkin
-            &ll=${position.latitude},${position.longitude}
-            &radius=${params.radius}
-            &client_id=${params.clientId}
-            &client_secret=${params.clientSecret}
-            &limit=30 
-            &v=${params.version}`;
-    try {
-        const res = await fetch(endpoint);
-        const resp = await res.json();
-        return resp.response.venues;
-    }
-    catch (err) {
-        console.error('Error with places API', err);
-    }
+        &ll=${position.latitude},${position.longitude}
+        &radius=${params.radius}
+        &client_id=${params.clientId}
+        &client_secret=${params.clientSecret}
+        &limit=30 
+        &v=${params.version}`;
+    return fetch(endpoint)
+        .then((res) => {
+            return res.json()
+                .then((resp) => {
+                    return resp.response.venues;
+                })
+        })
+        .catch((err) => {
+            console.error('Error with places API', err);
+        })
 };
-*/
+
+// her skal der laves vores egen funktion der sender mqtt recievedMessage latlng ind i window.onload() nedenfor
+/*
+
 function loadPlaces(position) {
     // console.log("position loadPlaces: ")
     //console.log(position)
@@ -41,7 +45,7 @@ function loadPlaces(position) {
     console.log(position);
 };
 
-
+*/
 window.onload = () => {
     const scene = document.querySelector('a-scene');
         
@@ -49,16 +53,18 @@ window.onload = () => {
     return navigator.geolocation.getCurrentPosition(function (position) {
 
         // than use it to load from remote APIs some places nearby
-        loadPlaces(position)
+        loadPlaces(position.coords)
             .then((places) => {
                 places.forEach((place) => {
                     
                     // standard latlong
-                    //const latitude = place.location.lat;
-                    //const longitude = place.location.lng;
+                    const latitude = place.location.lat;
+                    const longitude = place.location.lng;
+                    
                     // MQTT
-                    const latitude = place.crd.lat;
-                    const longitude = place.crd.lon;
+                    //const latitude = place.crd.lat;
+                    //const longitude = place.crd.lon;
+                    
                     console.log("Places: latitude: ")
                     console.log(latitude);
 

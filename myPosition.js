@@ -31,7 +31,7 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 const broker = "influx.itu.dk";
 const port = 9002;
 const secured = true;
-const topic = "ituF2020/EXPD/DI-SaVoid";
+const topic = "ituF2020/EXPD/DI-SaVoid-AR";
 let clientId;
 
 /*
