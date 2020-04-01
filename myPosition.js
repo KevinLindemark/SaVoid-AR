@@ -87,6 +87,8 @@ function sendMessage(msg) {
     console.log("mSend: ");
     console.log(mSend);
     client.send(mSend);
+
+    setEntity();
 }
 
 // called when a message arrives
@@ -107,6 +109,6 @@ function receiveMessage(msg) {
     
   //console.log("cookieAsId ");
   //console.log(document.cookie);
-  
+  setEntity();
 
 }
