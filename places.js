@@ -76,7 +76,7 @@ window.onload = () => {
 
                     const markerEl = document.createElement('a-image');
                     
-                    markerEl.setAttribute('src', '../hello.png');
+                    markerEl.setAttribute('src', './hello.png');
 
                     entity.appendChild(markerEl);
                     
